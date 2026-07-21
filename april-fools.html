@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>جاري التحميل</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+    background: linear-gradient(135deg, #1e1e2f 0%, #2d2d44 50%, #1a1a2e 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .container {
+    text-align: center;
+    padding: 20px;
+    animation: fadeIn 1s ease-in;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .spinner {
+    width: 60px;
+    height: 60px;
+    border: 5px solid rgba(255, 255, 255, 0.15);
+    border-top: 5px solid #6c63ff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 30px;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .message {
+    font-size: clamp(24px, 6vw, 48px);
+    color: #ffffff;
+    font-weight: 700;
+    line-height: 1.6;
+    text-shadow: 0 2px 10px rgba(108, 99, 255, 0.4);
+  }
+
+  .dots span {
+    animation: blink 1.4s infinite;
+    display: inline-block;
+  }
+
+  .dots span:nth-child(2) { animation-delay: 0.2s; }
+  .dots span:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes blink {
+    0%, 80%, 100% { opacity: 0; }
+    40% { opacity: 1; }
+  }
+
+  .surprise {
+    display: none;
+  }
+
+  .surprise.show {
+    display: block;
+    animation: pop 0.6s cubic-bezier(0.36, 1.4, 0.64, 1);
+  }
+
+  .surprise .message {
+    font-size: clamp(32px, 8vw, 64px);
+    text-shadow: 0 2px 16px rgba(255, 99, 132, 0.6);
+  }
+
+  .emoji {
+    font-size: clamp(40px, 10vw, 70px);
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  @keyframes pop {
+    0% { opacity: 0; transform: scale(0.5) rotate(-8deg); }
+    60% { opacity: 1; transform: scale(1.1) rotate(3deg); }
+    100% { opacity: 1; transform: scale(1) rotate(0deg); }
+  }
+
+</style>
+</head>
+<body>
+
+  <div class="container" id="loadingScreen">
+    <div class="spinner"></div>
+    <div class="message">
+      جاري التحميل<span class="dots"><span>.</span><span>.</span><span>.</span></span>
+    </div>
+  </div>
+
+  <div class="container surprise" id="surpriseScreen">
+    <span class="emoji">🎉</span>
+    <div class="message">خدعة ابريل!</div>
+  </div>
+
+  <script>
+    setTimeout(function () {
+      document.getElementById('loadingScreen').style.display = 'none';
+      document.getElementById('surpriseScreen').classList.add('show');
+    }, 3000);
+  </script>
+
+</body>
+</html>
